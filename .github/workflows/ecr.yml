@@ -14,6 +14,13 @@ jobs:
           role-to-assume: arn:aws:iam::601394826940:role/test-ecr-cache-gha
           role-session-name: gha
           aws-region: us-west-2
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          mask-password: 'true'
+          aws-region: us-west-2
+  
       # - name: Build and push
       #   uses: docker/build-push-action@v2
       #   with:
