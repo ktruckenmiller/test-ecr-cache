@@ -14,6 +14,11 @@ jobs:
           role-to-assume: arn:aws:iam::601394826940:role/test-ecr-cache-gha
           role-session-name: gha
           aws-region: us-west-2
+      - name: qemu
+        uses: docker/setup-qemu-action@v2
+        with: 
+          platforms: arm64
+          
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -28,3 +33,4 @@ jobs:
           tags: 601394826940.dkr.ecr.us-west-2.amazonaws.com/test-ecr
           cache-from: type=registry,ref=601394826940.dkr.ecr.us-west-2.amazonaws.com/test-ecr
           cache-to: type=inline
+          platforms: linux/amd64,linux/arm64
